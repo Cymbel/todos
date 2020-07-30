@@ -1,0 +1,45 @@
+<!--Avec Subscribe
+<ul>
+    <li *ngFor="let todo of todos">
+        {{todo.title}}
+    </li>
+</ul> -->
+<!--Avec Async
+<ul>
+    <li *ngFor="let todo of todos$ | async">
+        {{todo.title}}
+    </li>
+</ul> -->
+<!--Avec un tableau Material -->
+<table mat-table [dataSource]="todos$" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> # </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dueDate">
+        <th mat-header-cell *matHeaderCellDef> Due Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.dueDate | date:"d/M/y"}} </td>
+      </ng-container>
+      <ng-container matColumnDef="completed">
+        <th mat-header-cell *matHeaderCellDef> Completed ? </th>
+        <td mat-cell *matCellDef="let element"> {{element.completed}} </td>
+      </ng-container>
+      <ng-container matColumnDef="completedchk">
+        <th mat-header-cell *matHeaderCellDef> Completed ? </th>
+        <td mat-cell *matCellDef="let element"> <mat-checkbox [(ngModel)]= "element.completed"></mat-checkbox> </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="accent" (click)="deleteTodo(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
